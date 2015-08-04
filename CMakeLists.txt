@@ -9,10 +9,10 @@ set (PROJECT_BINARY_DIR "bin")
  
 # configure a header file to pass some of the CMake settings
 # to the source code
-configure_file (
-  "${PROJECT_SOURCE_DIR}/CBreakoutConfig.h.in"
-  "${PROJECT_BINARY_DIR}/CBreakoutConfig.h"
-  )
+# configure_file (
+#  "${PROJECT_SOURCE_DIR}/CBreakoutConfig.h.in"
+#  "${PROJECT_BINARY_DIR}/CBreakoutConfig.h"
+#  )
  
 # add the binary tree to the search path for include files
 # so that we will find TutorialConfig.h

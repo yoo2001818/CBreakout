@@ -28,10 +28,17 @@ int main() {
     cout << "Cannot initialize SDL_image: " << SDL_GetError() << endl;
   }
   // init app
-  CApp * app = new CApp(window);
+  try {
+    CApp * app = new CApp(window);
 
-  app->Init();
-  app->Loop();
-  app->Cleanup();
-
+    app->Init();
+    app->Loop();
+    app->Cleanup();
+  } catch (char * e) {
+    cout << e << SDL_GetError() << endl;
+    return false;
+  } catch (exception& e) {
+    cout << e.what() << endl;
+    return false;
+  }
 }

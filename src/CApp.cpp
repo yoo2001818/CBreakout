@@ -1,9 +1,12 @@
 #include "CApp.h"
 
-CApp::CApp(SDL_Window * window) {
+CApp::CApp(SDL_Window * window) throw() {
   isRunning = true;
   this->window = window;
-  this->screenSurface = SDL_GetWindowSurface(window);
+  renderer = SDL_CreateRenderer(window, -1, 0);
+  if (renderer == NULL) {
+    throw "Cannot create renderer";
+  }
 }
 
 CApp::~CApp() {
@@ -11,7 +14,7 @@ CApp::~CApp() {
 
 void CApp::Init() {
   // Load stuff we need to load, etc..
-  testSurface = IMG_Load("test.png");
+  testTexture = LoadTexture(renderer, "res/test.png");
   rect.x = 0;
   rect.y = 0;
   rect.w = 32;
@@ -45,11 +48,10 @@ void CApp::Loop() {
     }
     // Update stage
     // Render stage
-    int bgColor = SDL_MapRGBA(screenSurface->format, 
-      255, 255, 0, 255);
-    SDL_FillRect(screenSurface, NULL, bgColor);
-    SDL_BlitSurface(testSurface, NULL, screenSurface, &rect);
-    SDL_UpdateWindowSurface(window);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_RenderFillRect(renderer, NULL);
+    SDL_RenderCopy(renderer, testTexture, NULL, &rect);
+    SDL_RenderPresent(renderer);
     SDL_Delay(1000/60);
   }
 }

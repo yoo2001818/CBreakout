@@ -1,3 +1,0 @@
-#define APP_WIDTH 800
-#define APP_HEIGHT 600
-#define APP_NAME "Breakout"
