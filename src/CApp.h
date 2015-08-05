@@ -4,12 +4,15 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include "Utils.h"
+#include "CStage.h"
 
 class CApp {
 public:
   SDL_Window * window;
   SDL_Renderer * renderer;
   bool isRunning;
+
+  CStage * stage;
 
   CApp(SDL_Window * window) throw();
   virtual ~CApp();
@@ -18,9 +21,7 @@ public:
   void Loop();
   void Cleanup();
 
-  // Should be removed
-  SDL_Texture * testTexture;
-  SDL_Rect rect;
+  static CApp * instance;
 };
 
 #endif

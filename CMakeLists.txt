@@ -6,6 +6,8 @@ set (CPPTest_VERSION_MINOR 1)
 
 set (PROJECT_SOURCE_DIR "src")
 set (PROJECT_BINARY_DIR "bin")
+
+list( APPEND CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS} -g -ftest-coverage -fprofile-arcs")
  
 # configure a header file to pass some of the CMake settings
 # to the source code
@@ -19,7 +21,7 @@ set (PROJECT_BINARY_DIR "bin")
 include_directories("${PROJECT_BINARY_DIR}")
 include_directories("${PROJECT_SOURCE_DIR}")
  
-file(GLOB SOURCES ${PROJECT_SOURCE_DIR}/*.cpp)
+file(GLOB_RECURSE SOURCES ${PROJECT_SOURCE_DIR}/*.cpp)
 # add the executable
 add_executable(CBreakout ${SOURCES})
 

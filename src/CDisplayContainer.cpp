@@ -6,6 +6,8 @@
  */
 
 #include "CDisplayContainer.h"
+#include <iostream>
+using namespace std;
 
 CDisplayContainer::CDisplayContainer() {
 }
@@ -17,6 +19,8 @@ CDisplayContainer::~CDisplayContainer() {
 void CDisplayContainer::AddChild(CDisplayObject * object) {
   children.push_back(object);
   object->parent = this;
+  object->stage = stage;
+  object->OnAdd();
 }
 
 void CDisplayContainer::AddChildAt(CDisplayObject * object, int index) {
@@ -24,8 +28,10 @@ void CDisplayContainer::AddChildAt(CDisplayObject * object, int index) {
 }
 
 void CDisplayContainer::RemoveChild(CDisplayObject * object) {
+  object->OnRemove();
   children.remove(object);
   object->parent = NULL;
+  object->stage = NULL;
 }
 
 void CDisplayContainer::RemoveChildAt(int index) {
@@ -37,26 +43,26 @@ void CDisplayContainer::RemoveChildren(int begin, int end) {
 }
 
 bool CDisplayContainer::Contains(CDisplayObject * object) {
-  /*for(auto it = children.begin(); it != children.end(); ++it) {
+  for(auto it = children.begin(); it != children.end(); ++it) {
     if(*it == object) return true;
-  }*/
+  }
   return false;
 }
 
 void CDisplayContainer::Event(SDL_Event * event) {
-  /*for(auto it = children.begin(); it != children.end(); ++it) {
+  for(auto it = children.begin(); it != children.end(); ++it) {
     (*it)->Event(event);
-  }*/
+  }
 }
 
 void CDisplayContainer::Update(int delta) {
-  /*for(auto it = children.begin(); it != children.end(); ++it) {
+  for(auto it = children.begin(); it != children.end(); ++it) {
     (*it)->Update(delta);
-  }*/
+  }
 }
 
 void CDisplayContainer::Render() {
-  /*for(auto it = children.begin(); it != children.end(); ++it) {
+  for(auto it = children.begin(); it != children.end(); ++it) {
     (*it)->Render();
-  }*/
+  }
 }

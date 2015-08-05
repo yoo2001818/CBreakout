@@ -8,6 +8,7 @@
 #ifndef SRC_CTEXTURE_H_
 #define SRC_CTEXTURE_H_
 
+#include <iostream>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
@@ -16,15 +17,18 @@ public:
   CTexture();
   virtual ~CTexture();
 
-  bool LoadFromFile(std::string path);
+  bool LoadFromFile(SDL_Renderer * renderer, std::string path);
 
   void Free();
-  void Render(SDL_Renderer * renderer, int x, int y);
+  void Render(int x, int y);
+  void RenderEx(int x, int y, double angle,
+    SDL_Point * center, SDL_RendererFlip flip);
 
   int GetWidth();
   int GetHeight();
 
 private:
+  SDL_Renderer * renderer;
   SDL_Texture * texture;
   int width;
   int height;

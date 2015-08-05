@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 class CDisplayContainer;
+class CStage;
 
 class CDisplayObject {
 public:
@@ -11,7 +12,7 @@ public:
 
 	SDL_Rect rect;
 
-	// CStage * stage;
+	CStage * stage;
 	CDisplayContainer * parent;
 
 	virtual void Event(SDL_Event * event) {
@@ -21,10 +22,17 @@ public:
 	virtual void Render() {
 	}
 
-	SDL_Point GlobalToLocal(SDL_Point point);
-	SDL_Point LocalToGlobal(SDL_Point point);
+	virtual void OnAdd() {
+
+	}
+	virtual void OnRemove() {
+
+	}
+
+	virtual SDL_Point GlobalToLocal(SDL_Point point);
+	virtual SDL_Point LocalToGlobal(SDL_Point point);
 	bool HitTestRect(SDL_Rect rect);
-	bool HitTestPoint(SDL_Point rect);
+	bool HitTestPoint(SDL_Point point);
 };
 
 #endif /* SRC_CDISPLAYOBJECT_H_ */

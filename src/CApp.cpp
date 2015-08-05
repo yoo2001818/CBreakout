@@ -1,12 +1,18 @@
 #include "CApp.h"
+#include "game/CTitleScene.h"
+#include "game/CGameScene.h"
+
+CApp * CApp::instance = NULL;
 
 CApp::CApp(SDL_Window * window) throw() {
+  CApp::instance = this;
   isRunning = true;
   this->window = window;
   renderer = SDL_CreateRenderer(window, -1, 0);
   if (renderer == NULL) {
     throw "Cannot create renderer";
   }
+  stage = NULL;
 }
 
 CApp::~CApp() {
@@ -14,14 +20,13 @@ CApp::~CApp() {
 
 void CApp::Init() {
   // Load stuff we need to load, etc..
-  testTexture = LoadTexture(renderer, "res/test.png");
-  rect.x = 0;
-  rect.y = 0;
-  rect.w = 32;
-  rect.h = 32;
+  stage = new CStage(this);
+  stage->AddChild(new CTitleScene());
+  stage->AddChild(new CGameScene());
 }
 
 void CApp::Loop() {
+  int time = SDL_GetTicks();
   while (isRunning) {
     // Event stage
     SDL_Event event;
@@ -29,30 +34,20 @@ void CApp::Loop() {
       if (event.type == SDL_QUIT) {
         // Just turn off the app
         isRunning = false;
-      } else if (event.type == SDL_KEYDOWN) {
-        switch (event.key.keysym.sym) {
-          case SDLK_UP:
-            rect.y -= 5;
-          break;
-          case SDLK_LEFT:
-            rect.x -= 5;
-          break;
-          case SDLK_RIGHT:
-            rect.x += 5;
-          break;
-          case SDLK_DOWN:
-            rect.y += 5;
-          break;
-        }
       }
+      stage->Event(&event);
     }
     // Update stage
+    int currentTime = SDL_GetTicks();
+    stage->Update(currentTime - time);
     // Render stage
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-    SDL_RenderFillRect(renderer, NULL);
-    SDL_RenderCopy(renderer, testTexture, NULL, &rect);
+    SDL_RenderClear(renderer);
+    stage->Render();
     SDL_RenderPresent(renderer);
     SDL_Delay(1000/60);
+    time = currentTime;
   }
 }
 
