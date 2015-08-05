@@ -27,11 +27,15 @@ void CCharacter::OnAdd() {
 
 void CCharacter::Event(SDL_Event * event) {
   CSprite::Event(event);
+  if (event->type == SDL_MOUSEMOTION) {
+    rect.x = event->motion.x;
+    rect.y = event->motion.y;
+  }
 }
 
 void CCharacter::Update(int delta) {
   CSprite::Update(delta);
-  graphics->rotation += delta * 3.14159 / 10;
+  //graphics->rotation += delta * 3.14159 / 10;
   const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
   if (currentKeyStates[SDL_SCANCODE_W]) {
     rect.y -= delta * 300/1000;

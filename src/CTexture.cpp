@@ -53,14 +53,12 @@ void CTexture::Render(int x, int y) {
     cout << width << ", " << height << endl;
     cout << "Failed to draw texture: " << SDL_GetError() << endl;
   }
-  //SDL_RenderPresent(renderer);
 }
 
 void CTexture::RenderEx(int x, int y, double angle,
     SDL_Point * center, SDL_RendererFlip flip) {
   SDL_Rect rect = {x, y, width, height};
   SDL_RenderCopyEx(renderer, texture, NULL, &rect, angle, center, flip);
-  //SDL_RenderPresent(renderer);
 }
 
 int CTexture::GetWidth() {
