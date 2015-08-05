@@ -6,7 +6,7 @@
 
 using namespace std;
 
-int main() {
+int main(int argc, char *argv[]) {
   SDL_Window * window = NULL;
   // init SDL
   if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {

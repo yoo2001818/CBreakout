@@ -7,8 +7,14 @@ set (CPPTest_VERSION_MINOR 1)
 set (PROJECT_SOURCE_DIR "src")
 set (PROJECT_BINARY_DIR "bin")
 
-list( APPEND CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS} -g -ftest-coverage -fprofile-arcs")
- 
+IF (WIN32)
+  set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -lmingw32 -lSDL2main -lSDL2 -lm -ldinput8 -ldxguid -ldxerr8 -luser32 -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lshell32 -lversion -luuid")
+  set (CMAKE_FIND_LIBRARY_SUFFIXES ".a")
+  set (BUILD_SHARED_LIBRARIES OFF)
+  set (CMAKE_EXE_LINKER_FLAGS "-static")
+ELSE()
+  set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+ENDIF()
 # configure a header file to pass some of the CMake settings
 # to the source code
 # configure_file (
@@ -22,6 +28,8 @@ include_directories("${PROJECT_BINARY_DIR}")
 include_directories("${PROJECT_SOURCE_DIR}")
  
 file(GLOB_RECURSE SOURCES ${PROJECT_SOURCE_DIR}/*.cpp)
+file(MAKE_DIRECTORY "res/")
+file(COPY "res/" DESTINATION "res/")
 # add the executable
 add_executable(CBreakout ${SOURCES})
 
