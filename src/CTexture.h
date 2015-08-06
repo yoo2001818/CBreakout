@@ -17,12 +17,14 @@ public:
   CTexture();
   virtual ~CTexture();
 
+  bool oneTimeUse;
+
   bool LoadFromFile(SDL_Renderer * renderer, std::string path);
 
   void Free();
-  void Render(int x, int y);
-  void RenderEx(int x, int y, double angle,
-    SDL_Point * center, SDL_RendererFlip flip);
+  void Render(int x, int y, SDL_Rect * srcRect, int width, int height, int alpha);
+  void RenderEx(int x, int y, SDL_Rect * srcRect, double angle,
+    SDL_Point * center, SDL_RendererFlip flip, int width, int height, int alpha);
 
   int GetWidth();
   int GetHeight();

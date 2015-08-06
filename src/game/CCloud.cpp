@@ -8,19 +8,24 @@
 #include "CCloud.h"
 #include "CApp.h"
 #include "../CBreakoutConfig.h"
+#include <math.h>
 
-CTexture * CCloud::cachedTexture = NULL;
+
+SDL_Rect clouds[] = {
+    {182, 102, 124, 84},
+    {311, 102, 173, 113},
+    {180, 191, 127, 85},
+    {311, 217, 164, 121},
+    {134, 282, 173, 113}
+};
 
 CCloud::CCloud() {
-  if(cachedTexture == NULL) {
-    cachedTexture = new CTexture();
-    cachedTexture->LoadFromFile(CApp::instance->renderer, "res/cloud.png");
-  }
   graphics = new CGraphics();
-  graphics->texture = cachedTexture;
+  graphics->texture = CGraphics::spriteSheet;
+  graphics->src = &clouds[rand()%4];
   AddChild(graphics);
-  rect.x = APP_WIDTH;
-  velX = -300/1000.f;
+  rect.w = graphics->src->w;
+  rect.h = graphics->src->h;
 }
 
 CCloud::~CCloud() {
@@ -29,7 +34,16 @@ CCloud::~CCloud() {
 
 void CCloud::Update(int delta) {
   CVelocitySprite::Update(delta);
-  if(rect.x < -cachedTexture->GetWidth()) {
-    rect.x = APP_WIDTH;
+  if (rect.x < -rect.w) {
+    isAlive = false;
   }
+}
+
+bool CCloud::OnCollide(CBall * ball) {
+  float direction = rand() % 360 / 180.f * 3.141592f;
+  ball->velX = cos(direction) * ball->speed;
+  ball->velY = sin(direction) * ball->speed;
+  parent->RemoveChild(this);
+  //delete this;
+  return false;
 }

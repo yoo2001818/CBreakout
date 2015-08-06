@@ -6,6 +6,7 @@
  */
 
 #include "CDisplayContainer.h"
+#include "CDisplayObject.h"
 #include <iostream>
 using namespace std;
 
@@ -23,15 +24,19 @@ void CDisplayContainer::AddChild(CDisplayObject * object) {
   object->OnAdd();
 }
 
+void CDisplayContainer::AddChildFront(CDisplayObject * object) {
+  children.push_front(object);
+  object->parent = this;
+  object->stage = stage;
+  object->OnAdd();
+}
+
 void CDisplayContainer::AddChildAt(CDisplayObject * object, int index) {
   // Not implemented
 }
 
 void CDisplayContainer::RemoveChild(CDisplayObject * object) {
-  object->OnRemove();
-  children.remove(object);
-  object->parent = NULL;
-  object->stage = NULL;
+  object->isAlive = false;
 }
 
 void CDisplayContainer::RemoveChildAt(int index) {
@@ -56,12 +61,24 @@ void CDisplayContainer::Event(SDL_Event * event) {
 }
 
 void CDisplayContainer::Update(int delta) {
-  for(auto it = children.begin(); it != children.end(); ++it) {
+  CDisplayObject::Update(delta);
+  for(auto it = children.begin(); it != children.end();) {
+    CDisplayObject * object = *it;
+    if (!object->isAlive) {
+      object->OnRemove();
+      it = children.erase(it);
+      object->parent = NULL;
+      object->stage = NULL;
+      delete object;
+      continue;
+    }
     (*it)->Update(delta);
+    it++;
   }
 }
 
 void CDisplayContainer::Render() {
+  CDisplayObject::Render();
   for(auto it = children.begin(); it != children.end(); ++it) {
     (*it)->Render();
   }

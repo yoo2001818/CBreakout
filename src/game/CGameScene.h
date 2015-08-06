@@ -9,16 +9,32 @@
 #define SRC_GAME_CGAMESCENE_H_
 
 #include "../CScene.h"
-#include "CCharacter.h"
+#include "CPaddle.h"
+#include "CBall.h"
+#include "CHPDisp.h"
 
 class CGameScene: public CScene {
 public:
   CGameScene();
   virtual ~CGameScene();
 
-  virtual void OnAdd();
+  float difficulty;
+  int timer;
+  int cloudTimer;
+  int angryTimer;
+  int ballCounter;
+  int hp;
+  int maxhp;
 
-  CCharacter * character;
+  virtual void OnAdd();
+  virtual void OnRemove();
+  virtual void Update(int delta);
+  virtual void Event(SDL_Event * event);
+
+  CSprite * bgLayer;
+  CSprite * gameLayer;
+  CPaddle * paddle;
+  CHPDisp * hpDisp;
 };
 
 #endif /* SRC_GAME_CGAMESCENE_H_ */

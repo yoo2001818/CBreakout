@@ -19,11 +19,18 @@ public:
 
   CTexture * texture;
 
+  SDL_Rect * src;
   double rotation;
   SDL_Point center;
   SDL_RendererFlip flip;
+  int alpha;
 
   virtual void Render();
+
+  void SetTexture(CTexture * texture);
+
+  static CTexture * spriteSheet;
 };
+
 
 #endif /* SRC_CGRAPHICS_H_ */

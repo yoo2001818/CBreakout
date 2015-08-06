@@ -12,14 +12,23 @@ public:
 
 	SDL_Rect rect;
 
+	float x;
+	float y;
+
 	CStage * stage;
 	CDisplayContainer * parent;
+
+	bool isAlive;
 
 	virtual void Event(SDL_Event * event) {
 	}
 	virtual void Update(int delta) {
+	  rect.x = (int)x;
+	  rect.y = (int)y;
 	}
 	virtual void Render() {
+	  rect.x = (int)x;
+	  rect.y = (int)y;
 	}
 
 	virtual void OnAdd() {

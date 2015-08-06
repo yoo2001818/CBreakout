@@ -13,6 +13,8 @@ CTexture::CTexture() {
   width = 0;
   height = 0;
   texture = NULL;
+  renderer = NULL;
+  oneTimeUse = true;
 }
 
 CTexture::~CTexture() {
@@ -45,20 +47,23 @@ void CTexture::Free() {
   SDL_DestroyTexture(texture);
 }
 
-void CTexture::Render(int x, int y) {
-  cout << x << ", " << y << endl;
+void CTexture::Render(int x, int y, SDL_Rect * srcRect, int width, int height, int alpha) {
   SDL_Rect rect = {x, y, width, height};
-  SDL_Rect origin = {0, 0, width, height};
-  if (SDL_RenderCopy(renderer, texture, &origin, &rect)) {
+  //std::cout << x << ", " << y << ", " << width << ", " << height <<
+  //    ", " << srcRect->x << ", " << srcRect->y <<std::endl;
+  SDL_SetTextureAlphaMod(texture, alpha);
+  if (SDL_RenderCopy(renderer, texture, srcRect, &rect)) {
     cout << width << ", " << height << endl;
     cout << "Failed to draw texture: " << SDL_GetError() << endl;
   }
 }
 
-void CTexture::RenderEx(int x, int y, double angle,
-    SDL_Point * center, SDL_RendererFlip flip) {
+void CTexture::RenderEx(int x, int y, SDL_Rect * srcRect, double angle,
+    SDL_Point * center, SDL_RendererFlip flip, int width, int height, int alpha) {
+  std::cout << x << ", " << y << std::endl;
   SDL_Rect rect = {x, y, width, height};
-  SDL_RenderCopyEx(renderer, texture, NULL, &rect, angle, center, flip);
+  SDL_SetTextureAlphaMod(texture, alpha);
+  SDL_RenderCopyEx(renderer, texture, srcRect, &rect, angle, center, flip);
 }
 
 int CTexture::GetWidth() {

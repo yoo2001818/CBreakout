@@ -11,6 +11,7 @@
 #include "CVelocitySprite.h"
 #include "../CTexture.h"
 #include "../CGraphics.h"
+#include "ICollidable.h"
 
 class CCloud: public CVelocitySprite {
 public:
@@ -20,8 +21,7 @@ public:
   CGraphics * graphics;
 
   void Update(int delta);
-
-  static CTexture * cachedTexture;
+  bool OnCollide(CBall * ball);
 };
 
 #endif /* SRC_GAME_CCLOUD_H_ */

@@ -21,6 +21,7 @@ public:
   list<CDisplayObject *> children;
 
   void AddChild(CDisplayObject * object);
+  void AddChildFront(CDisplayObject * object);
   void AddChildAt(CDisplayObject * object, int index);
   void RemoveChild(CDisplayObject * object);
   void RemoveChildAt(int index);

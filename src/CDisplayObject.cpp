@@ -15,6 +15,9 @@ CDisplayObject::CDisplayObject() {
   rect.h = 0;
   parent = NULL;
   stage = NULL;
+  isAlive = true;
+  x = 0;
+  y = 0;
 }
 
 CDisplayObject::~CDisplayObject() {
@@ -43,9 +46,9 @@ bool CDisplayObject::HitTestRect(SDL_Rect rect) {
 bool CDisplayObject::HitTestPoint(SDL_Point point) {
   // What.
   SDL_Rect rect = this->rect;
-  if (rect.x < point.x) return false;
-  if (rect.x + rect.w > point.x) return false;
-  if (rect.y < point.y) return false;
-  if (rect.y + rect.h > point.y) return false;
+  if (rect.x > point.x) return false;
+  if (rect.x + rect.w < point.x) return false;
+  if (rect.y > point.y) return false;
+  if (rect.y + rect.h < point.y) return false;
   return true;
 }

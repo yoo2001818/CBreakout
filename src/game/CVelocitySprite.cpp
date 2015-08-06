@@ -17,6 +17,6 @@ CVelocitySprite::~CVelocitySprite() {
 
 void CVelocitySprite::Update(int delta) {
   CSprite::Update(delta);
-  rect.x += velX * delta;
-  rect.y += velY * delta;
+  x += velX * delta;
+  y += velY * delta;
 }

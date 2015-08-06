@@ -31,6 +31,9 @@ void CCharacter::Event(SDL_Event * event) {
     rect.x = event->motion.x;
     rect.y = event->motion.y;
   }
+  if (event->type == SDL_MOUSEBUTTONDOWN) {
+    graphics->rect.w = 1000;
+  }
 }
 
 void CCharacter::Update(int delta) {

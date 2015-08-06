@@ -11,7 +11,7 @@
 #include "../CScene.h"
 #include "../CGraphics.h"
 #include "../CTexture.h"
-#include "CCloud.h"
+#include "CCloudContainer.h"
 
 class CTitleScene: public CScene {
 public:
@@ -19,10 +19,13 @@ public:
   virtual ~CTitleScene();
 
   virtual void OnAdd();
+  virtual void Event(SDL_Event * event);
   virtual void Update(int delta);
 
   CGraphics * background;
   CGraphics * foreground;
+
+  int timer;
 };
 
 #endif /* SRC_GAME_CTITLESCENE_H_ */
