@@ -13,6 +13,7 @@ Mix_Chunk * EFFECT_KILL[3];
 Mix_Chunk * EFFECT_DAMAGE[3];
 Mix_Chunk * EFFECT_SPLAT;
 Mix_Chunk * EFFECT_REVIVE;
+Mix_Chunk * EFFECT_ITEM;
 Mix_Music * MUSIC;
 
 CApp * CApp::instance = NULL;
@@ -58,6 +59,7 @@ void CApp::Init() {
   EFFECT_KILL[2] = Mix_LoadWAV("res/kill3.ogg");
   EFFECT_SPLAT = Mix_LoadWAV("res/splat.ogg");
   EFFECT_REVIVE = Mix_LoadWAV("res/revive.ogg");
+  EFFECT_ITEM = Mix_LoadWAV("res/item.ogg");
   for(int i = 0; i < 3; ++i) {
     Mix_VolumeChunk(EFFECT_KILL[i], 64);
   }

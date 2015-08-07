@@ -8,6 +8,8 @@
 #include "CPaddle.h"
 #include "../CBreakoutConfig.h"
 #include <math.h>
+#include "CItem.h"
+#include "CScoreScene.h"
 
 CGraphics * createNewGraphics() {
   CGraphics * graphics = new CGraphics();
@@ -57,6 +59,18 @@ void CPaddle::Update(int delta) {
   rectX += disXpos;
   velX += (-velX) / 10.f;
   x = rectX;
+  for (auto it = parent->children.begin(); it != parent->children.end(); it++) {
+    if(*it == this) continue;
+    CDisplayObject * other = *it;
+    if (other->HitTestRect(rect)) {
+      SDL_Rect target;
+      SDL_IntersectRect(&rect, &(other->rect), &target);
+      CItem * obj = dynamic_cast<CItem *>(other);
+      if (obj == NULL) continue;
+      CScoreScene::score += 100;
+      obj->OnPaddle(this);
+    }
+  }
 }
 
 bool CPaddle::OnCollide(CBall * ball) {

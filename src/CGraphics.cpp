@@ -36,7 +36,7 @@ void CGraphics::Render() {
     SDL_Point point = LocalToGlobal(SDL_Point{0, 0});
     //SDL_Point point = {rect.x, rect.y};
     //texture->RenderEx(point.x, point.y, src,
-    //    rotation, &center, flip, rect.w, rect.h);
+    //   rotation, &center, flip, rect.w, rect.h, alpha);
     //texture->Render(point.x, point.y);
     texture->Render(point.x, point.y, src, rect.w, rect.h, alpha);
   }

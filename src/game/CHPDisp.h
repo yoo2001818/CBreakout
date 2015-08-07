@@ -13,7 +13,7 @@
 
 class CHPDisp: public CSprite {
 public:
-  CHPDisp();
+  CHPDisp(bool gray);
   virtual ~CHPDisp();
 
   CGraphics * header;

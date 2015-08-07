@@ -44,8 +44,8 @@ CGameScene::CGameScene() {
   difficulty = 1;
   angryTimer = 10;
 
-  hp = 20;
-  maxhp = 20;
+  hp = 10;
+  maxhp = 10;
 
   for (int i = 0; i < 800; i += 40) {
     CCloud * cloud = new CCloud();
@@ -56,7 +56,10 @@ CGameScene::CGameScene() {
     bgLayer->AddChild(cloud);
   }
 
-  hpDisp = new CHPDisp();
+  hpDispBack = new CHPDisp(true);
+  AddChild(hpDispBack);
+
+  hpDisp = new CHPDisp(false);
   AddChild(hpDisp);
 
   scoreScene = new CScoreScene();
@@ -80,12 +83,14 @@ void CGameScene::OnRemove() {
 
 void CGameScene::Update(int delta) {
   CScene::Update(delta);
+  if (hp > maxhp) hp = maxhp;
   //paddle->rect.h = 160 - ballCounter * 10;
   if (hp <= 0) {
     // Game over man!
     parent->AddChild(new CTitleScene());
     isAlive = false;
   }
+  hpDispBack->rect.w = 20 * maxhp;
   hpDisp->rect.w = 20 * hp;
   timer -= delta;
   cloudTimer -= delta;

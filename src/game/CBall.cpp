@@ -8,6 +8,7 @@
 #include "CBall.h"
 #include "../CBreakoutConfig.h"
 #include "ICollidable.h"
+#include "CItem.h"
 #include "CGameScene.h"
 #include "CScoreScene.h"
 #include "CPaddle.h"

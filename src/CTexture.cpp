@@ -60,7 +60,7 @@ void CTexture::Render(int x, int y, SDL_Rect * srcRect, int width, int height, i
 
 void CTexture::RenderEx(int x, int y, SDL_Rect * srcRect, double angle,
     SDL_Point * center, SDL_RendererFlip flip, int width, int height, int alpha) {
-  std::cout << x << ", " << y << std::endl;
+  //std::cout << x << ", " << y << std::endl;
   SDL_Rect rect = {x, y, width, height};
   SDL_SetTextureAlphaMod(texture, alpha);
   SDL_RenderCopyEx(renderer, texture, srcRect, &rect, angle, center, flip);

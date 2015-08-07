@@ -13,6 +13,7 @@ extern Mix_Chunk * EFFECT_KILL[3];
 extern Mix_Chunk * EFFECT_DAMAGE[3];
 extern Mix_Chunk * EFFECT_SPLAT;
 extern Mix_Chunk * EFFECT_REVIVE;
+extern Mix_Chunk * EFFECT_ITEM;
 extern Mix_Music * MUSIC;
 
 class CApp {

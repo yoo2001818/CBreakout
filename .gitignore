@@ -39,6 +39,8 @@ cmake_install.cmake
 .project
 .cproject
 
+score.txt
+
 CBreakout
 
 lib_win/

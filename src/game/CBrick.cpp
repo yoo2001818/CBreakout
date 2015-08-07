@@ -10,6 +10,7 @@
 #include "CBreakEffect.h"
 #include "CScoreScene.h"
 #include "CGameScene.h"
+#include "CItem.h"
 
 int killCycle = 0;
 
@@ -43,6 +44,12 @@ void CBrick::Update(int delta) {
 }
 
 bool CBrick::OnCollide(CBall * ball) {
+  if (rand()%9 == 3) {
+    CItem * newball = new CItem();
+    newball->x = x - newball->rect.w;
+    newball->y = y + rect.h / 2 - newball->rect.h / 2;
+    parent->AddChild(newball);
+  }
   CScoreScene::score += 200;
   CBreakEffect::DoBreak(parent, graphics, velX + ball->velX / 2, velY + ball->velY / 2);
   parent->RemoveChild(this);

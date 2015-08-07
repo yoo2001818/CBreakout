@@ -36,6 +36,7 @@ public:
   CSprite * gameLayer;
   CPaddle * paddle;
   CScoreScene * scoreScene;
+  CHPDisp * hpDispBack;
   CHPDisp * hpDisp;
 };
 
