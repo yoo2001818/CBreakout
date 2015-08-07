@@ -64,10 +64,11 @@ bool CPaddle::OnCollide(CBall * ball) {
   if (!HitTestPoint(left)) return true;
   Mix_PlayChannel(-1, EFFECT_BOUNCE1, 0);
   float degrees = atan2((rect.y + rect.h / 2) - (ball->rect.y + ball->rect.h / 2),
-      rect.x - ball->rect.x);
+      -60);
   ball->velX = -cos(degrees) * ball->speed;
   ball->velY = -sin(degrees) * ball->speed;
   if (ball->velX < 50/1000.f) ball->velX = 50/1000.f;
   velX -= ball->velX * 30;
+  ball->x = x + rect.w;
   return false;
 }

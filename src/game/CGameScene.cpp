@@ -75,6 +75,7 @@ void CGameScene::OnRemove() {
 
 void CGameScene::Update(int delta) {
   CScene::Update(delta);
+  //paddle->rect.h = 160 - ballCounter * 10;
   if (hp <= 0) {
     // Game over man!
     parent->AddChild(new CTitleScene());
@@ -83,7 +84,7 @@ void CGameScene::Update(int delta) {
   hpDisp->rect.w = 20 * hp;
   timer -= delta;
   cloudTimer -= delta;
-  difficulty += delta / (100 * 1000.f);
+  difficulty += delta / (80 * 1000.f);
   if (ballCounter == 0) {
     hp -= 1;
     Mix_PlayChannel(-1, EFFECT_REVIVE, 0);

@@ -86,21 +86,28 @@ void CBall::Update(int delta) {
         hit ++;
         if (target.w > target.h && target.y > other->rect.y + other->rect.h / 2) {
           velY = -velY;
+          if (velY < 0) velY = -velY;
           y = other->rect.y + other->rect.h;
         }
         if (target.w > target.h && target.y < other->rect.y + other->rect.h / 2) {
           velY = -velY;
+          if (velY > 0) velY = -velY;
           y = other->rect.y - rect.h;
         }
         if (target.w < target.h && target.x > other->rect.x + other->rect.w / 2) {
           velX = -velX;
+          if (velX < 0) velX = -velX;
           x = other->rect.x + other->rect.w;
         }
         if (target.w < target.h && target.x < other->rect.x + other->rect.w / 2) {
           velX = -velX;
+          if (velX > 0) velX = -velX;
           x = other->rect.x - rect.w;
         }
       }
+      rect.x = x;
+      rect.y = y;
+      break;
     }
   }
   if (hit) {
