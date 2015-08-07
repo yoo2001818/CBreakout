@@ -44,7 +44,7 @@ void CBrick::Update(int delta) {
 }
 
 bool CBrick::OnCollide(CBall * ball) {
-  if (rand()%9 == 3) {
+  if (rand()%12 == 3) {
     CItem * newball = new CItem();
     newball->x = x - newball->rect.w;
     newball->y = y + rect.h / 2 - newball->rect.h / 2;
