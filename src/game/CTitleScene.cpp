@@ -44,9 +44,15 @@ CTitleScene::CTitleScene() {
   //CBreakEffect::DoBreak(this, background, 0, -0.1f);
   //CBreakEffect::DoBreak(this, foreground, 0, -0.1f);
   //foreground->isAlive = false;
+  scoreScene = new CScoreScene();
+  AddChild(scoreScene);
 }
 
 CTitleScene::~CTitleScene() {
+  delete scoreScene;
+  delete foreground;
+  delete bgLayer;
+  delete background;
 }
 
 void CTitleScene::OnAdd() {

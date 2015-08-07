@@ -9,6 +9,7 @@
 #include "../CBreakoutConfig.h"
 #include "ICollidable.h"
 #include "CGameScene.h"
+#include "CScoreScene.h"
 #include "CPaddle.h"
 #define PI 3.141592f
 #include <math.h>
@@ -60,16 +61,19 @@ void CBall::Update(int delta) {
     isAlive = false;
   }
   if (x > APP_WIDTH - rect.w) {
+    CScoreScene::score += 3;
     x = APP_WIDTH - rect.w;
     velX = -velX;
     hit ++;
   }
   if (y < 0) {
+    CScoreScene::score += 3;
     velY = -velY;
     y = 0;
     hit ++;
   }
   if (y > APP_HEIGHT - rect.h) {
+    CScoreScene::score += 3;
     velY = -velY;
     y = APP_HEIGHT - rect.h;
     hit ++;
@@ -82,6 +86,7 @@ void CBall::Update(int delta) {
       SDL_IntersectRect(&rect, &(other->rect), &target);
       ICollidable * obj = dynamic_cast<ICollidable *>(other);
       if (obj == NULL) continue;
+      CScoreScene::score += 10;
       if (obj->OnCollide(this)) {
         hit ++;
         if (target.w > target.h && target.y > other->rect.y + other->rect.h / 2) {

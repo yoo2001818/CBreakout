@@ -59,6 +59,11 @@ CGameScene::CGameScene() {
   hpDisp = new CHPDisp();
   AddChild(hpDisp);
 
+  scoreScene = new CScoreScene();
+  AddChild(scoreScene);
+
+  CScoreScene::score = 0;
+
 }
 
 CGameScene::~CGameScene() {
@@ -120,6 +125,7 @@ void CGameScene::Update(int delta) {
     timer = (rand() % 3000) / difficulty + 100 * 1000 / (30 * difficulty) + 300;
   }
   if (cloudTimer < 0) {
+    CScoreScene::score += 20 * difficulty;
     cloudTimer = 2000 / difficulty;
     CCloud * cloud = new CCloud();
     cloud->x = APP_WIDTH;
@@ -128,6 +134,7 @@ void CGameScene::Update(int delta) {
     cloud->velX = (-20 - rand()%5) * difficulty / 1000.f;
     bgLayer->AddChild(cloud);
   }
+
 }
 
 void CGameScene::Event(SDL_Event * event) {

@@ -12,6 +12,7 @@
 #include "CPaddle.h"
 #include "CBall.h"
 #include "CHPDisp.h"
+#include "CScoreScene.h"
 
 class CGameScene: public CScene {
 public:
@@ -34,6 +35,7 @@ public:
   CSprite * bgLayer;
   CSprite * gameLayer;
   CPaddle * paddle;
+  CScoreScene * scoreScene;
   CHPDisp * hpDisp;
 };
 

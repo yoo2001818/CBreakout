@@ -8,6 +8,7 @@
 #include "CBrick.h"
 #include "../CGraphics.h"
 #include "CBreakEffect.h"
+#include "CScoreScene.h"
 #include "CGameScene.h"
 
 int killCycle = 0;
@@ -42,6 +43,7 @@ void CBrick::Update(int delta) {
 }
 
 bool CBrick::OnCollide(CBall * ball) {
+  CScoreScene::score += 200;
   CBreakEffect::DoBreak(parent, graphics, velX + ball->velX / 2, velY + ball->velY / 2);
   parent->RemoveChild(this);
   Mix_PlayChannel(-1, EFFECT_KILL[(killCycle++) % 3], 0);

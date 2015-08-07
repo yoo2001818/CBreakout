@@ -2,6 +2,10 @@
 #include "game/CTitleScene.h"
 #include "game/CGameScene.h"
 #include "CGraphics.h"
+#include <iostream>
+#include <fstream>
+
+using namespace std;
 
 Mix_Chunk * EFFECT_BOUNCE1 = NULL;
 Mix_Chunk * EFFECT_DROP = NULL;
@@ -32,6 +36,13 @@ CApp::~CApp() {
 }
 
 void CApp::Init() {
+  // Load high score
+  ifstream highScore;
+  highScore.open("score.txt");
+  if (highScore.is_open()) {
+    highScore >> CScoreScene::highScore;
+    highScore.close();
+  }
   // Sprite sheet. what?
   CGraphics::spriteSheet = new CTexture();
   CGraphics::spriteSheet->LoadFromFile(renderer, "res/sprite.png");
@@ -84,6 +95,13 @@ void CApp::Loop() {
 }
 
 void CApp::Cleanup() {
+  // Save high score
+  ofstream highScore;
+  highScore.open("score.txt");
+  if (highScore.is_open()) {
+    highScore << CScoreScene::highScore;
+    highScore.close();
+  }
   SDL_DestroyWindow(window);
   window = NULL;
   SDL_Quit();

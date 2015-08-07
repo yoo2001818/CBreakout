@@ -6,6 +6,7 @@
  */
 
 #include "CHardBrick.h"
+#include "CScoreScene.h"
 
 CHardBrick::CHardBrick() {
   hp = 1;
@@ -17,6 +18,7 @@ CHardBrick::~CHardBrick() {
 
 bool CHardBrick::OnCollide(CBall * ball) {
   if (hp > 0) {
+    CScoreScene::score += 150;
     hp --;
     if (hp == 0) {
       graphics->src = new SDL_Rect {80, 0, 100, 100};

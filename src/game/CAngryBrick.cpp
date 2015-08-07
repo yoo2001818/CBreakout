@@ -6,6 +6,7 @@
  */
 
 #include "CAngryBrick.h"
+#include "CScoreScene.h"
 #include "../CBreakoutConfig.h"
 
 CAngryBrick::CAngryBrick() {
@@ -33,6 +34,7 @@ void CAngryBrick::Update(int delta) {
 bool CAngryBrick::OnCollide(CBall * ball) {
   // Create new ball
   if (!spit) {
+    CScoreScene::score += 100;
     Mix_PlayChannel(-1, EFFECT_SPLAT, 0);
     CBall * newball = new CBall();
     newball->x = x - newball->rect.w;

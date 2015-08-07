@@ -11,6 +11,7 @@
 #include "../CScene.h"
 #include "../CGraphics.h"
 #include "../CTexture.h"
+#include "CScoreScene.h"
 #include "CCloudContainer.h"
 
 class CTitleScene: public CScene {
@@ -25,6 +26,7 @@ public:
   CGraphics * background;
   CSprite * bgLayer;
   CGraphics * foreground;
+  CScoreScene * scoreScene;
 
   int cloudTimer;
   int timer;

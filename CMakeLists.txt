@@ -14,7 +14,7 @@ IF (WIN32)
 
   set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -I/usr/include/SDL2 -D_REENTRANT")
   set (CMAKE_FIND_LIBRARY_SUFFIXES ".a")
-  set (BUILD_SHARED_LIBRARIES OFF)
+  set (BUILD_SHARED_LIBRARIES ON)
   set (CMAKE_EXE_LINKER_FLAGS "-lSDL2 -lpthread -lSDL2_image -lSDL2_mixer -static-libgcc -static-libstdc++")
   
   # -static -static-libstdc++ -static-libgcc -lstdc++ -lmingw32 -lSDL2_mixer -lFLAC -lvorbisfile -lvorbis -logg -lsmpeg2 -lmodplug -lpthread -lwinpthread -lSDL2_image -lpng -ljpeg -lz -lSDL2main -lSDL2 -lm -ldinput8 -ldxguid -ldxerr8 -luser32 -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lshell32 -lversion -luuid
