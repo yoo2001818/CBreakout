@@ -23,8 +23,10 @@ public:
   virtual void Update(int delta);
 
   CGraphics * background;
+  CSprite * bgLayer;
   CGraphics * foreground;
 
+  int cloudTimer;
   int timer;
 };
 
